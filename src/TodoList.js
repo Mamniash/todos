@@ -1,4 +1,7 @@
+import { Link, Navigate } from "react-router-dom";
 export default function TodoList(props) {
+   if (!props.currentUser)
+      return <Navigate to="/login" replace />;
    return (
       <section>
          <h1>Дела</h1>
@@ -7,8 +10,10 @@ export default function TodoList(props) {
                {props.list.map((item) => (
                   <tr key={item.key}>
                      <td>
-                        {item.done && <del>{item.title}</del>}
-                        {!item.done && item.title}
+                        <Link to={`/${item.key}`}>
+                           {item.done && <del>{item.title}</del>}
+                           {!item.done && item.title}
+                        </Link>
                      </td>
                      <td>
                         <button
@@ -24,7 +29,6 @@ export default function TodoList(props) {
                         <button
                            className="button is-danger"
                            title="Удалить"
-                           disabled={item.done}
                            onClick={(e) => props.delete(item.key)}
                         >
                            &#9746;
