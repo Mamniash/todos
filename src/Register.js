@@ -54,7 +54,7 @@ export default class Register extends Component {
          }));
          return false;
       };
-      if (this.formData.password != this.formData.passwordConfirm) {
+      if (this.formData.password !== this.formData.passwordConfirm) {
          this.setState(() => ({
             errorPassword: 'Введенные пароли не совпадают',
             errorPasswordConfirm: 'Введенные пароли не совпадают'
